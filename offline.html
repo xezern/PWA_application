@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline - Postgram</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #25353a 0%, #1a2528 100%);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        text-align: center;
+        max-width: 400px;
+      }
+      .icon {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+      }
+      h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        opacity: 0.9;
+        margin-bottom: 30px;
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: rgba(244, 67, 54, 0.2);
+        border: 1px solid rgba(244, 67, 54, 0.5);
+        border-radius: 25px;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        background: #f44336;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      .features {
+        text-align: left;
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+      }
+      .features h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+      .features ul {
+        list-style: none;
+      }
+      .features li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+      .features li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #4caf50;
+        font-weight: bold;
+      }
+      button {
+        margin-top: 20px;
+        padding: 12px 30px;
+        background: #2979ff;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #1c60cd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">📡</div>
+      <div class="status">
+        <span class="status-dot"></span>
+        <span>İnternet bağlantısı yoxdur</span>
+      </div>
+      <h1>Offline Rejim</h1>
+      <p>İnternet bağlantısı olmadığı üçün bəzi funksiyalar məhdudlaşdırılıb. Lakin, offline rejimdə də bəzi əməliyyatları yerinə yetirə bilərsiniz.</p>
+      
+      <div class="features">
+        <h3>Offline rejimdə edilə bilənlər:</h3>
+        <ul>
+          <li>Kontaktları görüntüləmək</li>
+          <li>Yeni kontakt əlavə etmək (sinxronlaşdırılacaq)</li>
+          <li>Kontaktları silmək</li>
+          <li>Keçmiş səhifələri görüntüləmək</li>
+        </ul>
+      </div>
+
+      <button onclick="window.location.href='/'">Ana səhifəyə qayıt</button>
+    </div>
+
+    <script>
+      // Check if online and redirect
+      function checkConnection() {
+        if (navigator.onLine) {
+          window.location.href = '/';
+        }
+      }
+      
+      window.addEventListener('online', checkConnection);
+      setInterval(checkConnection, 3000); // Check every 3 seconds
+    </script>
+  </body>
+</html>
