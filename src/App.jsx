@@ -47,13 +47,13 @@ function App() {
   useEffect(() => {
     const handleOnline = async () => {
       setIsOnline(true);
-      
+
       // Sync pending contacts when coming back online
       try {
         const pending = await getPendingContacts();
         if (pending.length > 0) {
           console.log(`[Sync] Found ${pending.length} pending contacts to sync`);
-          
+
           for (const contact of pending) {
             try {
               await addContact(contact);
@@ -200,7 +200,7 @@ function App() {
 
       <main>
         <h1>Kontaktlarınızı paylaşın</h1>
-        
+
         {!isOnline && (
           <div
             style={{
@@ -233,19 +233,19 @@ function App() {
           </div>
         ) : (
           contacts.map((contact) => (
-          <div className="contacts pk-contact" key={contact.id}>
-            <div className="contact-image">
-              <img src="/icons/contact.avif" alt="contact thumb" />
-            </div>
-            <div className="contact-details">
-              <div className="contact-title">{contact.name}</div>
-              <div className="contact-numbers">{contact.number}</div>
-            </div>
-            <div className="contact-options">
-              <IoIosCall />
+            <div className="contacts pk-contact" key={contact.id}>
+              <div className="contact-image">
+                <img src="/icons/contact.avif" alt="contact thumb" />
+              </div>
+              <div className="contact-details">
+                <div className="contact-title">{contact.name}</div>
+                <div className="contact-numbers">{contact.number}</div>
+              </div>
+              <div className="contact-options">
+                <IoIosCall />
               <MdDelete onClick={() => handleDelete(contact.id)} />
+              </div>
             </div>
-          </div>
           ))
         )}
 
@@ -257,7 +257,7 @@ function App() {
           <div className="modal-overlay" onClick={() => setModalOpen(false)}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <form className="add-contact">
-                  <h3>Yeni Kontakt</h3>
+                <h3>Yeni Kontakt</h3>
                 <input
                   name="name"
                   value={form.name}

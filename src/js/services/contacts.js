@@ -7,7 +7,7 @@ export const listenContacts = (callback) => {
   return onSnapshot(contactsRef, (snapshot) => {
     const contacts = [];
     snapshot.forEach(doc => {
-      contacts.push({ id: doc.id, ...doc.data() });
+      contacts.push({ ...doc.data(), id: doc.id, });
     });
     callback(contacts);
   });
@@ -27,7 +27,7 @@ export const deleteContact = async (id) => {
 
     // id-ni string-ə çevirək (Firestore həmişə string ID gözləyir)
     const contactId = String(id).trim();
-    
+
     // Boş string-dən sonra yenidən yoxlayaq
     if (!contactId) {
       throw new Error("Contact ID cannot be empty");
