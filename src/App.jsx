@@ -58,7 +58,10 @@ function App() {
 
           for (const contact of pending) {
             try {
+              console.log("contact", contact);  
               await addContact(contact);
+              // setContacts([...contacts, contact]);
+              console.log("contacts", contacts);
               console.log("[Sync] Contact synced:", contact);
             } catch (error) {
               console.error("[Sync] Error syncing contact:", error);
@@ -102,6 +105,8 @@ function App() {
 
     if (!navigator.onLine) {
       try {
+
+        setContacts([...contacts, contact]);
         await saveContactIndexedDB(contact);
         alert("✅ Offline yadda saxlandı. İnternet gələndə avtomatik göndəriləcək!");
 
@@ -147,6 +152,7 @@ function App() {
         // ID-ni string-ə çevirək
         const contactId = String(id).trim();
         await deleteContact(contactId);
+        setContacts(contacts.filter((contact) => contact.id !== contactId));
         console.log("✅ Contact deleted successfully from Firebase");
       } catch (error) {
         console.error("Error deleting contact from Firebase:", error);
@@ -157,8 +163,10 @@ function App() {
         // Offline üçün də ID-ni string-ə çevirək
         const contactId = String(id).trim();
         await deleteContactFromIndexedDB(contactId);
+        setContacts(contacts.filter((contact) => contact.id !== contactId));
         alert("✅ Kontakt offline silindi, sinxronlaşdırılacaq");
       } catch (error) {
+
         console.error("Error deleting contact from IndexedDB:", error);
         alert("❌ Xəta: Kontakt silinmədi!");
       }

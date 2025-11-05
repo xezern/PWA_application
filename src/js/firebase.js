@@ -1,7 +1,7 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
 // lazımdırsa Firestore, Auth və s. burada import edirsən
-import { getFirestore } from "firebase/firestore";
+import { initializeFirestore, persistentLocalCache } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC3jDbeBYEU4h3x49qfSjPfqqO3fxPHu-4",
@@ -13,7 +13,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+
+// Firestore offline persistence ilə aktivləşdir
+const db = initializeFirestore(app, {
+  localCache: persistentLocalCache(),
+});
+
+console.log("✅ Firestore offline persistence aktivləşdirildi");
 
 export default app;
 export { db };
