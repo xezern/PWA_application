@@ -192,6 +192,38 @@ main h1 {
   background: #1f63d9;
 }
 
+.contact-delete {
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.2s;
+  color: #ff0000;
+}
+
+.contact-delete:hover {
+  opacity: 0.7;
+}
+
+.loading {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #fff;
+  border-top: 2px solid #2979ff;
+  border-radius: 50%;
+}
+
+.loading-text {
+  font-size: 16px;
+  color: #fff;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {

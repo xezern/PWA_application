@@ -22,6 +22,7 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [form, setForm] = useState({ name: "", number: "" });
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
@@ -39,6 +40,7 @@ function App() {
   useEffect(() => {
     const unsub = listenContacts((data) => {
       setContacts(data);
+      setIsLoading(false);  
     });
     return () => unsub();
   }, []);
@@ -217,7 +219,13 @@ function App() {
           </div>
         )}
 
-        {contacts.length === 0 ? (
+          {isLoading ? (
+          <div className="loading">
+            <div className="loading-spinner">
+              <div className="loading-spinner-inner"></div>
+            </div>
+          </div>
+        ) : contacts.length === 0 ? (
           <div
             style={{
               padding: "40px 20px",
@@ -243,15 +251,15 @@ function App() {
               </div>
               <div className="contact-options">
                 <IoIosCall />
-              <MdDelete onClick={() => handleDelete(contact.id)} />
+                <MdDelete className="contact-delete" onClick={() => handleDelete(contact.id)} />
               </div>
             </div>
           ))
         )}
 
-        <button className="add-btn" onClick={() => setModalOpen(true)}>
+       {!isLoading && <button className="add-btn" onClick={() => setModalOpen(true)}>
           +
-        </button>
+        </button>}
 
         {modalOpen && (
           <div className="modal-overlay" onClick={() => setModalOpen(false)}>
